@@ -21,8 +21,8 @@ A .NET 10.0 Web API for managing users, accounts, and cards.
    ```
 
 3. **Access the API**
-   - API: http://localhost:8080
-   - Swagger UI: http://localhost:8080/swagger
+   - API: http://localhost:5225
+   - Swagger UI: http://localhost:5225/swagger
 
 ## API Endpoints
 
@@ -71,7 +71,7 @@ A .NET 10.0 Web API for managing users, accounts, and cards.
 docker build -t pocketcard-api .
 
 # Run the container
-docker run -p 8080:8080 pocketcard-api
+docker run -p 5225:5225 pocketcard-api
 
 # Run with Docker Compose
 docker-compose up -d

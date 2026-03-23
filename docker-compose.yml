@@ -1,12 +1,10 @@
-version: '3.8'
-
 services:
   pocketcard-api:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "5225:5225"
     env_file:
       - .env
     volumes:
