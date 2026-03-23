@@ -1,0 +1,9 @@
+PocketCard.Infrastructure/bin
+PocketCard.Infrastructure/obj
+PocketCard.Api/bin
+PocketCard.Api/obj
+PocketCard.Domain/bin
+PocketCard.Domain/obj
+PocketCard.UseCases/bin
+PocketCard.UseCases/obj
+request.rest

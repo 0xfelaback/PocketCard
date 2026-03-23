@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  pocketcard-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - pocketcard-db:/app/data
+    networks:
+      - pocketcard-network
+    restart: unless-stopped
+
+volumes:
+  pocketcard-db:
+    driver: local
+
+networks:
+  pocketcard-network:
+    driver: bridge
