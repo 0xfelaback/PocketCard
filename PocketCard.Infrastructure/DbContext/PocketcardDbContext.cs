@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-//using ProjectManagementAPI.src.Domain;
 
 public class PocketcardDbContext(DbContextOptions<PocketcardDbContext> options) : DbContext(options)
 {
@@ -10,15 +9,13 @@ public class PocketcardDbContext(DbContextOptions<PocketcardDbContext> options) 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //base.OnModelCreating(modelBuilder);
-        // modelBuilder.Entity<User>().HasKey(u => u.Id);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(PocketcardDbContext).Assembly);
     }
 }
 
 public static class DbConfig
 {
-    public static void UseSqlite(this IServiceCollection services, string connectionString = null)
+    public static void UseSqlite(this IServiceCollection services, string connectionString = "Data Source=/Users/great/Desktop/cs/PocketCard/PocketCard.Infrastructure/local.db")
     {
         var defaultConnectionString = "Data Source=/app/data/pocketcard.db";
         var actualConnectionString = connectionString ?? defaultConnectionString;

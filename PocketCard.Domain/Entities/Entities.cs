@@ -1,16 +1,15 @@
 public class User
 {
-
-    public int Id { get; private set; }
+    public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string Password { get; set; } = null!;
     public string Email { get; set; } = null!;
-    public DateTime CreatedAt { get; private set; }
+    public DateTime CreatedAt { get; set; }
 }
 
 public class Account
 {
-    public int Id { get; private set; }
+    public int Id { get; set; }
     public int UserId { get; set; }
     public string AccountName { get; set; } = null!;
     public string AccountType { get; set; } = null!;
@@ -21,7 +20,7 @@ public class Account
 
 public class Card
 {
-    public int Id { get; private set; }
+    public int Id { get; set; }
     public int UserId { get; set; }
     public int AccountID { get; set; }
     public enum cardType { Debit, Credit, Physical, Virtual, Prepaid }

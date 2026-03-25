@@ -7,3 +7,6 @@ PocketCard.Domain/obj
 PocketCard.UseCases/bin
 PocketCard.UseCases/obj
 request.rest
+PocketCard.Infrastructure/local.db
+PocketCard.Infrastructure/local.db-shm
+PocketCard.Infrastructure/local.db-wal

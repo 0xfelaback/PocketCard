@@ -1,9 +1,9 @@
 using System.Data;
 using System.Text;
+using Dapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-//using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
@@ -16,11 +16,10 @@ using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure database connection
-// Configure database connection
-var databasePath = builder.Configuration["Database:Path"] ?? "/app/data/pocketcard.db";
+var databasePath = builder.Configuration.GetSection("Database")["Path"] ?? "/app/data/pocketcard.db";
 var connectionString = $"Data Source={databasePath}";
 builder.Services.AddScoped<IDbConnection>(options => new SqliteConnection(connectionString));
+SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
 builder.Services.AddProblemDetails(options =>
 {
     options.CustomizeProblemDetails = context =>
@@ -85,7 +84,24 @@ app.UseUserEndpoints();
 app.UseAccountEndpoints();
 app.UseCardEndpoints();
 
-// Health check endpoint
+using (var scope = app.Services.CreateAsyncScope())
+{
+    PocketcardDbContext dbcontext = scope.ServiceProvider.GetRequiredService<PocketcardDbContext>();
+    await dbcontext.Database.EnsureCreatedAsync();
+
+    var users = DataSeeder.GenerateUsers();
+    var accounts = DataSeeder.GenerateAccounts();
+    var cards = DataSeeder.GenerateCards();
+
+    if (!dbcontext.Users.Any())
+    {
+    await dbcontext.Users.AddRangeAsync(users);
+    await dbcontext.Accounts.AddRangeAsync(accounts);
+    await dbcontext.Cards.AddRangeAsync(cards);
+    await dbcontext.SaveChangesAsync();
+    }
+}
+
 app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }));
 
 app.Run();

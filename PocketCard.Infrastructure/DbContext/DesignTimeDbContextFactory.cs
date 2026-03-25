@@ -7,8 +7,7 @@ public class ProjectManagementAPIContextFactory : IDesignTimeDbContextFactory<Po
     public PocketcardDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<PocketcardDbContext>();
-        optionsBuilder.UseSqlite("Data Source=/Users/great/Documents/PocketCard/PocketCard.Infrastructure/local.db");
-
+        optionsBuilder.UseSqlite("Data Source=/Users/great/Desktop/cs/PocketCard/PocketCard.Infrastructure/local.db");
         return new PocketcardDbContext(optionsBuilder.Options);
     }
 }

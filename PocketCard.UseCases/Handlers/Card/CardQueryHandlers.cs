@@ -77,7 +77,14 @@ public class TryUseCardQueryHandler : IRequestHandler<TryUseCardQuery, string>
     {
         var card = await _repository.GetCardById(request.CardId, cancellationToken);
         if (card is null) return "Card not found";
-        if (card.ExpirationDate < DateOnly.FromDateTime(DateTime.Now)) return "Card expired";
+        //DateOnly.TryParse(card.ExpirationDate.ToString(), out DateOnly parsedDate);
+        //DateTime.TryParseExact(, "yyyy-MM-dd", out DateTime parsedDate);
+        /*DateOnly parsedDate = DateOnly.ParseExact(
+            card.ExpirationDate.ToString(), 
+            "yyyy-MM-dd", 
+            System.Globalization.CultureInfo.InvariantCulture
+        );*/
+        if (card.ExpirationDate < DateOnly.FromDateTime(DateTime.Now)) return "Card is expired";
         return "Card is valid";
     }
 }
