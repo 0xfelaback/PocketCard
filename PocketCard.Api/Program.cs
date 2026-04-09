@@ -95,10 +95,10 @@ using (var scope = app.Services.CreateAsyncScope())
 
     if (!dbcontext.Users.Any())
     {
-    await dbcontext.Users.AddRangeAsync(users);
-    await dbcontext.Accounts.AddRangeAsync(accounts);
-    await dbcontext.Cards.AddRangeAsync(cards);
-    await dbcontext.SaveChangesAsync();
+        await dbcontext.Users.AddRangeAsync(users);
+        await dbcontext.Accounts.AddRangeAsync(accounts);
+        await dbcontext.Cards.AddRangeAsync(cards);
+        await dbcontext.SaveChangesAsync();
     }
 }
 

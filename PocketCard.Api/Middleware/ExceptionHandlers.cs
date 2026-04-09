@@ -12,7 +12,7 @@ internal sealed class GlobalValidationExceptionHandler(IProblemDetailsService pr
         }
         var errors = validationException.Errors.GroupBy(e => e.PropertyName)
         .ToDictionary(
-            g => g.Key, 
+            g => g.Key,
             g => g.Select(e => e.ErrorMessage).ToArray()
         );
         return await problemDetailsService.TryWriteAsync(new ProblemDetailsContext
